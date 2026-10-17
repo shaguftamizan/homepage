@@ -1,0 +1,829 @@
+
+:root {
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --sans: "Zalando Sans", sans-serif;
+  --text: #1f2a2e;
+  --muted: #2f3b3f;
+  --line: rgba(31, 42, 46, .2);
+  --g1: var(--l1);
+  --g2: var(--l2);
+  --g3: var(--l3);
+  --g4: var(--l4);
+  --accent: var(--la);
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Season palettes: l = light mode, d = dark mode */
+/* l1 = darkest (top, behind nav) → l4 = lightest (bottom). */
+/* hero = text color over the dark top. */
+
+:root[data-season="spring"] {
+  --l1: #E6A4B4;
+  --l2: #F3D7CA;
+  --l3: #F5EEE6;
+  --l4: #FFF8E3;
+  --la: #8a3d5c;
+  --hero: #1f2a2e;
+  --deco: #b0305f;
+}
+
+:root[data-season="summer"] {
+  --l1: #81BFDA;
+  --l2: #FADA7A;
+  --l3: #B1F0F7;
+  --l4: #F5F0CD;
+  --la: #8a3f00;
+  --hero: #1f2a2e;
+  --deco: #0e5f8f;
+}
+
+:root[data-season="monsoon"] {
+  --l1: #3B577D;
+  --l2: #44679F;
+  --l3: #C0D9E5;
+  --l4: #DDF5F7;
+  --la: #144a5c;
+  --hero: #f6f4ee;
+  --deco: #bfe6ff;
+}
+
+:root[data-season="fall"] {
+  --l1: #753422;
+  --l2: #B05B3B;
+  --l3: #D79771;
+  --l4: #FFEBC9;
+  --la: #7a2e0e;
+  --hero: #fff6e8;
+  --deco: #ffd08a;
+}
+
+:root[data-season="winter"] {
+  --l1: #213448;
+  --l2: #547792;
+  --l3: #94B4C1;
+  --l4: #EAE0CF;
+  --la: #27407a;
+  --hero: #f4f1ea;
+  --deco: #9fd4ff;
+}
+
+/* Global box sizing */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+/* Typography
+   Headings: Zalando Sans
+   Body text: JetBrains Mono
+*/
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font: 400 1.0625rem/1.7 var(--mono);
+
+  background-color: var(--g4);
+
+  /* Soft white veil over the seasonal gradient */
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, .15),
+      rgba(255, 255, 255, .15)
+    ),
+    linear-gradient(
+      180deg,
+      var(--g1) 0,
+      var(--g3) 55vh,
+      var(--g4) 120vh,
+      var(--g4) 100%
+    );
+}
+
+/* Apply Zalando Sans to headings throughout the page */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Zalando Sans", sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Navigation */
+
+nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1rem clamp(1.25rem, 5vw, 4rem);
+
+  background: transparent;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+
+  transition:
+    background-color .25s ease,
+    box-shadow .25s ease;
+}
+
+/* Added by script.js after scrolling */
+
+nav.scrolled {
+  background: var(--g1);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, .15);
+}
+
+nav .brand {
+  font: 700 1.05rem var(--mono);
+  text-decoration: none;
+  color: var(--hero);
+}
+
+nav ul {
+  display: flex;
+  gap: clamp(1rem, 3vw, 2rem);
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--mono);
+  font-size: .95rem;
+}
+
+nav ul a {
+  text-decoration: none;
+  color: var(--hero);
+}
+
+nav ul a:hover {
+  opacity: .7;
+}
+
+/* Sections and footer */
+
+section,
+footer {
+  padding: clamp(3.5rem, 9vw, 7rem)
+    clamp(1.25rem, 5vw, 4rem);
+}
+
+.wrap {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+section .wrap {
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) 2fr;
+
+  gap: 1rem clamp(2rem, 6vw, 5rem);
+  align-items: baseline;
+}
+
+@media (max-width: 640px) {
+  section .wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hero section */
+
+.hero {
+  min-height: 70vh;
+
+  display: flex;
+  align-items: center;
+
+  padding: clamp(3.5rem, 9vw, 7rem)
+    clamp(1.25rem, 5vw, 4rem);
+
+  position: relative;
+}
+
+.hero .wrap {
+  color: var(--hero);
+  width: 100%;
+  max-width: 72rem;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+
+  gap: 2.5rem clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .hero .wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Main hero heading */
+
+.hero h1 {
+  font-family: "Zalando Sans", sans-serif;
+  font-weight: 700;
+
+  font-size: clamp(2.25rem, 5vw, 4.25rem);
+  line-height: 1.08;
+  letter-spacing: 0em;
+
+  margin: 0 0 1.5rem;
+  color: var(--hero);
+}
+
+/* Seasonal gradient headline decoration */
+
+@supports (
+  (-webkit-background-clip: text) or
+  (background-clip: text)
+) {
+  .hero h1 {
+    background: linear-gradient(
+      100deg,
+      var(--hero) 0%,
+      var(--deco) 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* Preserve readable text color */
+    /* -webkit-text-fill-color: transparent; */
+    /* color: transparent; */
+  }
+}
+
+.hero h1::after {
+  content: "";
+
+  display: block;
+  width: 4.5rem;
+  height: 6px;
+
+  border-radius: 3px;
+  margin-top: 1.4rem;
+
+  background: var(--deco);
+}
+
+.hero p {
+  font-size: 1.25rem;
+  max-width: 36rem;
+  margin: 0;
+}
+
+/* Intro title and subtitle container */
+
+.intro {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+
+  padding: clamp(2rem, 4vw, 3.5rem);
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .1);
+}
+
+.hero .intro h1 {
+  font-family: "Zalando Sans", sans-serif;
+  font-size: clamp(2rem, 3.8vw, 3.25rem);
+  line-height: 1.15;
+
+  margin: 0 0 1.25rem;
+}
+
+.hero .intro h1::after {
+  margin-top: 1.25rem;
+}
+
+.hero .wrap h1,
+.hero .wrap p {
+  color: var(--text);
+}
+
+/* Section headings */
+
+h2 {
+  font-family: "Zalando Sans", sans-serif;
+  font-weight: 700;
+
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+
+  margin: 0;
+  color: var(--accent);
+}
+
+section p {
+  color: var(--muted);
+  margin: 0;
+}
+
+#bio,
+section + section,
+footer {
+  border-top: 1px solid var(--line);
+}
+
+/* Footer */
+
+footer ul {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+
+  font-family: var(--mono);
+}
+
+footer a:hover {
+  color: var(--accent);
+}
+
+/* Breathing dot grids behind the hero */
+
+.hero::before,
+.hero::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  pointer-events: none;
+
+  background-image: radial-gradient(
+    circle,
+    var(--hero) 1.6px,
+    transparent 2.2px
+  );
+
+  background-size: 32px 32px;
+
+  -webkit-mask-image: radial-gradient(
+    ellipse at 50% 50%,
+    #000 35%,
+    transparent 80%
+  );
+
+  mask-image: radial-gradient(
+    ellipse at 50% 50%,
+    #000 35%,
+    transparent 80%
+  );
+
+  opacity: .1;
+  animation: breathe 5s ease-in-out infinite;
+}
+
+.hero::after {
+  background-position: 16px 16px;
+  animation-delay: -6s;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: .08;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: .36;
+    transform: scale(1.03);
+  }
+}
+
+/* Memory game */
+
+.game {
+  --hero: #1f2a2e;
+  --g1: #fff;
+
+  background: rgba(255, 255, 255, .55);
+
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, .65);
+  border-radius: 20px;
+
+  padding: 1.25rem;
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, .18),
+    0 4px 14px rgba(0, 0, 0, .1);
+}
+
+.hero h2.game-title {
+  font-family: "Zalando Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.35;
+
+  letter-spacing: 0;
+  color: var(--hero);
+
+  margin: 0 0 .75rem;
+}
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5rem;
+
+  font: 500 .95rem var(--mono);
+  margin-bottom: .6rem;
+}
+
+.hud .play {
+  width: auto;
+  padding: .4rem 1.2rem;
+  font-size: .9rem;
+}
+
+.hud b {
+  font-size: 1.15rem;
+}
+
+/* Game timer */
+
+.timebar {
+  height: 4px;
+  border-radius: 2px;
+
+  background: color-mix(
+    in srgb,
+    var(--hero) 20%,
+    transparent
+  );
+
+  overflow: hidden;
+}
+
+.timebar i {
+  display: block;
+  height: 100%;
+
+  background: var(--hero);
+  transform-origin: left;
+}
+
+/* Game grid */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 9), 1fr);
+
+  gap: 4px;
+  margin: .9rem 0 0;
+
+  transition: opacity .3s;
+}
+
+.grid.idle {
+  opacity: .55;
+  pointer-events: none;
+}
+
+/* Game cells */
+
+.cell {
+  perspective: 500px;
+  aspect-ratio: 1;
+
+  padding: 0;
+  border: 0;
+  background: none;
+
+  cursor: pointer;
+  font: inherit;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cell .inner {
+  position: relative;
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  transform-style: preserve-3d;
+  transition: transform .45s;
+}
+
+.cell.flipped .inner {
+  transform: rotateY(180deg);
+}
+
+/* Card faces */
+
+.face {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  border-radius: 5px;
+
+  font: 700 clamp(.75rem, 2.3vw, 1.1rem) var(--mono);
+}
+
+.face.front {
+  background: color-mix(
+    in srgb,
+    var(--hero) 14%,
+    transparent
+  );
+
+  color: var(--hero);
+}
+
+.face.back {
+  background: var(--hero);
+  color: var(--g1);
+
+  transform: rotateY(180deg);
+
+  font-size: clamp(1rem, 3.2vw, 1.5rem);
+}
+
+/* Game feedback animations */
+
+.cell.hit .inner {
+  animation: pop .3s;
+}
+
+.cell.miss .front {
+  animation: nope .25s;
+}
+
+@keyframes pop {
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes nope {
+  25% {
+    transform: translateX(-3px);
+  }
+
+  75% {
+    transform: translateX(3px);
+  }
+}
+
+/* Buttons */
+
+.play {
+  width: 100%;
+  padding: .75rem 1rem;
+
+  border: 0;
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  background: var(--hero);
+  color: var(--g1);
+
+  font: 700 1rem var(--mono);
+}
+
+.play:disabled {
+  opacity: .6;
+  cursor: default;
+}
+
+.play:focus-visible {
+  outline: 2px solid var(--hero);
+  outline-offset: 3px;
+}
+
+/* Result dialog */
+
+dialog {
+  border: 0;
+  border-radius: 16px;
+
+  padding: 1.75rem 2rem;
+
+  text-align: center;
+
+  background: var(--g4);
+  color: var(--text);
+
+  min-width: min(20rem, 90vw);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, .45);
+}
+
+dialog h3 {
+  font-family: "Zalando Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+
+  margin: 0 0 .5rem;
+  color: var(--accent);
+}
+
+dialog p {
+  margin: 0 0 1.25rem;
+  font-size: 1.15rem;
+}
+
+dialog b {
+  font: 700 2.25rem var(--mono);
+}
+
+dialog .play {
+  background: var(--text);
+  color: #fff;
+}
+
+/* Popup close, CTA, and phone layout */
+
+.cta,
+.game-close,
+.scrim {
+  display: none;
+}
+
+.cta {
+  margin-top: 1.75rem;
+  padding: .8rem 1.4rem;
+
+  border: 2px solid var(--hero);
+  border-radius: 999px;
+
+  background: transparent;
+  color: var(--hero);
+
+  font: 700 1rem var(--mono);
+  cursor: pointer;
+}
+
+.cta:hover {
+  background: var(--hero);
+  color: var(--g1);
+}
+
+.game-close,
+dialog .x {
+  position: absolute;
+  top: .5rem;
+  right: .6rem;
+
+  width: 2.25rem;
+  height: 2.25rem;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  background: none;
+
+  font-size: 1.75rem;
+  line-height: 1;
+
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.game-close {
+  color: var(--hero);
+}
+
+dialog .x {
+  display: flex;
+  color: var(--text);
+}
+
+.game-close:focus-visible,
+dialog .x:focus-visible,
+.cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Mobile layout */
+
+@media (max-width: 640px) {
+  .cta {
+    display: inline-block;
+  }
+
+  .game {
+    display: none;
+  }
+
+  .game.open {
+    display: block;
+
+    position: fixed;
+    z-index: 40;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(92vw, 24rem);
+    max-height: 94vh;
+
+    overflow: auto;
+    background: var(--g4);
+  }
+
+  .scrim.open {
+    display: block;
+
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+
+    background: rgba(0, 0, 0, .5);
+  }
+
+  .game-close {
+    display: flex;
+  }
+
+  .hero h2.game-title {
+    padding-right: 2rem;
+  }
+
+  .grid {
+    gap: 6px;
+  }
+
+  .face {
+    font-size: 1.6rem;
+  }
+
+  .face.back {
+    font-size: 2rem;
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  .cell .inner {
+    transition: none;
+  }
+
+  .cell.hit .inner,
+  .cell.miss .front {
+    animation: none;
+  }
+
+  .hero::before,
+  .hero::after {
+    animation: none;
+    opacity: .18;
+  }
+}

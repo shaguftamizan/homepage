@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-season="winter">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>S.Mizan</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Zalando+Sans:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#top">SM</a>
+  <ul>
+    <li><a href="#bio">Bio</a></li>
+    <li><a href="#toolkit">Toolkit</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="intro">
+      <h1>Hi! I'm Shagufta</h1>
+      <p>E-commerce Analyst | Data Visualization Designer</p>
+      <button class="cta" id="cta" type="button">Bored? Play a Quick Game</button>
+    </div>
+    <div class="game">
+      <button class="game-close" id="gclose" type="button" aria-label="Close game">&times;</button>
+      <h2 class="game-title">How many ∞ can you find in 30 seconds?</h2>
+      <div class="hud">
+        <span>Score <b id="score" aria-live="polite">0</b></span>
+        <button class="play" id="play" type="button">Play</button>
+        <span>Time <b id="time">30</b>s</span>
+      </div>
+      <div class="timebar"><i id="bar"></i></div>
+      <div class="grid idle" id="grid"></div>
+    </div>
+  </div>
+</header>
+
+<section id="bio">
+  <div class="wrap">
+    <h2>Bio</h2>
+    <p>Placeholder paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+  </div>
+</section>
+
+<section id="toolkit">
+  <div class="wrap">
+    <h2>Toolkit</h2>
+    <p>Placeholder paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="wrap">
+    <h2>Portfolio</h2>
+    <p>Placeholder paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <ul>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+
+<dialog id="over" aria-labelledby="over-title">
+  <button class="x" id="close" type="button" aria-label="Close">&times;</button>
+  <h3 id="over-title">Time's up!</h3>
+  <p>You found <b id="final">0</b> <span aria-hidden="true">∞</span></p>
+  <button class="play" id="again" type="button">Play again</button>
+</dialog>
+ 
+<script src="script.js"></script>
+</body>
+</html>
